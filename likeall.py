@@ -4,6 +4,7 @@ import sys
 import tinder as ti
 from facebooktoken import get_access_token
 import time
+import requests
 
 if __name__ == '__main__':
 
@@ -34,6 +35,10 @@ if __name__ == '__main__':
                 break
             print(' -> Like')
             time.sleep(1)
-            match = ti.like(user.user_id)
+
+            try:
+                match = ti.like(user.user_id)
+            except requests.exceptions.ReadTimeout:
+                print "Timeout occurred"
             if match:
                 print(' -> Match!')

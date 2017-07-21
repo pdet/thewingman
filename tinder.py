@@ -82,7 +82,7 @@ def recommendations(auth_token,savindata=True):
         raise Exception('Invalid code')
 
     if 'results' not in r.json():
-        print('r.json ' + r.json())
+        print(r.json())
 
     for result in r.json()['results']:
         user = User(result)

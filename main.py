@@ -2,6 +2,11 @@ import json
 import sys
 import wget
 import tinder as ti
+from pathlib2 import Path
+import time
+import requests
+
+
 from facebooktoken import get_access_token
 
 if __name__ == '__main__':
@@ -25,9 +30,8 @@ if __name__ == '__main__':
 
         print('Successfully connected to Tinder servers.')
 
-        lat = 34.7
-        lon = 135.5
-        # http://words.alx.red/tinder-api-2-profile-and-geolocation/
+        lat = 52.365
+        lon = 4.926
         print(ti.change_loc(lat, lon, token))
         my_profile = ti.profile(token)
         print(json.dumps(my_profile, indent=4, sort_keys=True))
@@ -40,6 +44,9 @@ if __name__ == '__main__':
             filename_paths = []
             for urls in user.d['photos']:
                 directory = "data/" + str(user.age) + "/" + str(user.user_id) + "/"
+                if Path(directory+'1.png').exists() and count_photos == 1:
+
+                    break
                 url = urls['url']
                 filename_path = directory + str(count_photos) + ".png"
                 count_photos += 1
@@ -51,9 +58,14 @@ if __name__ == '__main__':
                 #     like_count += 1
                 #     print(' -> Like')
                 #     stats(like_count, nope_count)
-                #     match = ti.like(user.user_id)
-                #     if match:
-                #         print(' -> Match!')
+            time.sleep(1)
+            try:
+                match = ti.like(user.user_id)
+            except requests.exceptions.ReadTimeout:
+                print "Timeout occurred"
+
+            if match:
+                print(' -> Match!')
                 # else:
                 #     nope_count += 1
                 #     print(' -> nope')
