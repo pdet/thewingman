@@ -1,8 +1,6 @@
 import json
 import sys
 
-import wget
-
 import tinder as ti
 from facebooktoken import get_access_token
 
