@@ -3,7 +3,7 @@ import sys
 
 import tinder as ti
 from facebooktoken import get_access_token
-
+import time
 
 if __name__ == '__main__':
 
@@ -25,17 +25,15 @@ if __name__ == '__main__':
             sys.exit(0)
 
         print('Successfully connected to Tinder servers.')
-
-        lat = 34.7
-        lon = 135.5
-        print(ti.change_loc(lat, lon, token))
+        lat = 52.365
+        lon = 4.926
         my_profile = ti.profile(token)
-        print(json.dumps(my_profile, indent=4, sort_keys=True))
 
         for user in ti.recommendations(token,False):
             if not user:
                 break
             print(' -> Like')
+            time.sleep(1)
             match = ti.like(user.user_id)
             if match:
                 print(' -> Match!')
