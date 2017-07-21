@@ -1,6 +1,6 @@
 **[Pedro Holanda](http://pedroholanda.org)** (holanda@cwi.nl), Database Architectures Group, Centrum Wiskunde & Informatica, Amsterdam 
 
-# The Wingman : Online Learning for Online Dating ![Logo](file://https://github.com/pholanda/thewingman/blob/master/util/logo.png)
+# The Wingman : Online Learning for Online Dating ![Logo](file:https://raw.githubusercontent.com/pholanda/thewingman/master/util/logo.png?token=AHCSRalV46aeuvMUXxQ704KTNt7tlTFvks5Ze6cKwA%3D%3Dl)
 
 
 Create a credentials.json file

@@ -2,3 +2,5 @@ web/node_modules
 web/public/data/
 data/
 credentials.json
+.idea/
+*.pyc
