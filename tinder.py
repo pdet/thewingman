@@ -1,5 +1,6 @@
 import json
 from datetime import datetime
+import os
 
 import requests
 
@@ -73,7 +74,7 @@ def auth_token(fb_auth_token, fb_user_id):
         return None
 
 
-def recommendations(auth_token):
+def recommendations(auth_token,savindata=True):
     h = headers
     h.update({'X-Auth-Token': auth_token})
     r = requests.get('https://api.gotinder.com/user/recs', headers=h)
@@ -84,9 +85,14 @@ def recommendations(auth_token):
         print('r.json ' + r.json())
 
     for result in r.json()['results']:
-
-        print(json.dumps(r.json(), indent=4, sort_keys=True))
-        yield User(result)
+        user = User(result)
+        if(savindata):
+            directory = "data/" + str(user.age) + "/" + str(user.user_id) + "/"
+            if not os.path.exists(directory):
+                os.makedirs(directory)
+            with open(directory + 'info.json', 'w') as outfile:
+                json.dump(result, outfile, indent=4, sort_keys=True)
+        yield user
 
 
 def super_like(user_id):

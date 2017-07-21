@@ -1,19 +1,10 @@
 import json
-import os
 import sys
 
 import wget
 
 import tinder as ti
 from facebooktoken import get_access_token
-
-
-def stats(likes, nopes):
-    prop_likes = (float(likes) / (likes + nopes)) * 100.0
-    prop_nopes = 100.0 - prop_likes
-    print('likes = {} ({}%), nopes = {} ({}%)'.format(likes, prop_likes,
-                                                      nopes, prop_nopes))
-
 
 if __name__ == '__main__':
 
@@ -24,8 +15,6 @@ if __name__ == '__main__':
     print('FB_ID = {}'.format(fb_id))
     print('FB_AUTH_TOKEN = {}'.format(fb_auth_token))
 
-    like_count = 0
-    nope_count = 0
 
     while True:
         token = ti.auth_token(fb_auth_token, fb_id)
@@ -53,12 +42,6 @@ if __name__ == '__main__':
             filename_paths = []
             for urls in user.d['photos']:
                 directory = "data/" + str(user.age) + "/" + str(user.user_id) + "/"
-
-
-
-                if not os.path.exists(directory):
-                    os.makedirs(directory)
-
                 url = urls['url']
                 filename_path = directory + str(count_photos) + ".png"
                 count_photos += 1
